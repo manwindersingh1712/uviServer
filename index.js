@@ -1,6 +1,8 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
+
 const { ENV_VARS } = require("./assets/enums");
 
 const app = express();
@@ -16,7 +18,12 @@ app.get("/", (req, res, next) => {
   res.json({ message: "I am working" });
 });
 
-// enabling CORS Access
+// CORS Access
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
