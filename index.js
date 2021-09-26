@@ -1,7 +1,11 @@
+require('dotenv').config()
 const express = require("express");
 const mongoose = require("mongoose");
+const { ENV_VARS } = require("./assets/enums");
 
 const app = express();
+
+const { PORT, MONGO_SRV } = ENV_VARS;
 
 // enabling parsers
 app.use(express.urlencoded({ extended: true }));
@@ -26,13 +30,10 @@ app.use((req, res, next) => {
 app.use("/", require("./routes/main"));
 
 mongoose
-  .connect(
-    "mongodb+srv://manwinder:9910347671@cluster0.bderr.mongodb.net/my-server?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(MONGO_SRV, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("Connected to the MongoDb database");
-    app.listen(4000);
+    app.listen(PORT);
   })
   .catch((err) => {
     console.log(err);

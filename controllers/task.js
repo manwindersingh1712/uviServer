@@ -16,7 +16,7 @@ exports.postAddTask = (req, res, next) => {
   task
     .save()
     .then(() => {
-      res.status(201).json({ message: "Added a class to the database" });
+      res.status(201).json({ message: "Task Added Successfully!!" });
     })
     .catch((err) => {
       console.log(err);
@@ -42,7 +42,7 @@ exports.putAppointmentComplete = (req, res, next) => {
       return task.save();
     })
     .then(() => {
-      res.status(202).json({ message: "Updated successfully" });
+      res.status(202).json({ message: "Appointment completed successfully" });
     })
     .catch((err) => {
       console.log(err);
